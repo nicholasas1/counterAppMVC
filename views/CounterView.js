@@ -1,11 +1,10 @@
-// views/CounterView.js
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
 
 const CounterView = ({ count, increment, decrement, reset }) => {
   return (
     <View style={styles.container}>
-       <Text style={styles.heading}>Menggunakan MVC</Text>
+      <Text style={styles.heading}>Menggunakan MVC</Text>
       <Text style={styles.counter}>{count}</Text>
       <View style={styles.buttons}>
         <Button title="Increment" onPress={increment} />
@@ -19,8 +18,8 @@ const CounterView = ({ count, increment, decrement, reset }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   heading: {
     fontSize: 38,
@@ -31,9 +30,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
   },
 });
 
