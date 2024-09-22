@@ -1,23 +1,36 @@
+import React, { useState } from "react";
+import { Platform, SafeAreaView, StyleSheet } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
+import HomeView from "./views/HomeView";
+import LoginView from "./views/LoginView";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import CounterController from "./controller/CounterController";
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
-    <View style={styles.container}>
+    <PaperProvider>
       <SafeAreaView style={styles.container}>
-        <CounterController />
+        <StatusBar barStyle="light-content" backgroundColor="white" />
+        {isLoggedIn ? (
+          <HomeView />
+        ) : (
+          <LoginView onLoginSuccess={handleLoginSuccess} />
+        )}
       </SafeAreaView>
-      <StatusBar style="auto" />
-    </View>
+    </PaperProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 30,
   },
 });
