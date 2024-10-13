@@ -16,13 +16,41 @@ export const getDataById = async (id, callback) => {
   callback(result);
 };
 
-export const addNewData = async (name, age, gender, callback) => {
-  const result = await insertDataModel(name, age, gender);
+export const addNewData = async (
+  name,
+  age,
+  gender,
+  address,
+  id_card_number,
+  callback
+) => {
+  const result = await insertDataModel(
+    name,
+    age,
+    gender,
+    address,
+    id_card_number
+  );
   callback(result);
 };
 
-export const editData = async (id, name, age, gender, callback) => {
-  const result = await updateDataModel(id, name, age, gender);
+export const editData = async (
+  id,
+  name,
+  age,
+  gender,
+  address,
+  id_card_number,
+  callback
+) => {
+  const result = await updateDataModel(
+    id,
+    name,
+    age,
+    gender,
+    address,
+    id_card_number
+  );
   callback(result);
 };
 

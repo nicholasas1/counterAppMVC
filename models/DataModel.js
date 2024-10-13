@@ -4,15 +4,15 @@ const db = SQLite.openDatabaseSync("population_survey.db");
 
 export const initDB = async () => {
   await db.execAsync(`
+    PRAGMA journal_mode = WAL;
     CREATE TABLE IF NOT EXISTS survey_data (
       id INTEGER PRIMARY KEY NOT NULL,
-      id_card_number TEXT NOT NULL,
+      number TEXT NOT NULL,
       name TEXT NOT NULL,
       address TEXT NOT NULL,
       age INTEGER NOT NULL,
-      name TEXT NOT NULL,
       gender TEXT NOT NULL
-    )
+    );
   `);
   console.log("Table created successfully");
 };
@@ -30,14 +30,13 @@ export const insertData = async (
   address,
   id_card_number
 ) => {
-  console.log('hauhu')
   const result = await db.runAsync(
-    "INSERT INTO survey_data (name, age, gender,address,id_card_number) VALUES (?, ?, ?, ?, ?)",
+    "INSERT INTO survey_data (number, name, address, age, gender) VALUES (?, ?, ?, ?, ?)",
+    id_card_number,
     name,
-    age,
-    gender,
     address,
-    id_card_number
+    age,
+    gender
   );
   return result;
 };
@@ -52,13 +51,13 @@ export const updateData = async (
   id_card_number
 ) => {
   const result = await db.runAsync(
-    "UPDATE survey_data SET name = ?, age = ?, gender = ?, address = ?, id_card_number = ? WHERE id = ?",
+    "UPDATE survey_data SET number = ?, name = ?, address = ?, age = ?, gender = ? WHERE id = ?",
+    id_card_number,
     name,
+    address,
     age,
     gender,
-    id,
-    address,
-    id_card_number
+    id
   );
   return result;
 };
@@ -76,10 +75,9 @@ export const getDataById = async (id) => {
       "SELECT * FROM survey_data WHERE id = ?",
       [id]
     );
-    console.log(result);
-    return result.rows.length > 0 ? result.rows[0] : null; // Return the data if found, else return null
+    return result.length > 0 ? result[0] : null;
   } catch (error) {
     console.log("Error fetching data by ID:", error);
-    throw error; // Handle any errors that may occur
+    throw error; 
   }
 };
