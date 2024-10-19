@@ -1,47 +1,52 @@
-import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { ThemeProvider } from "react-native-elements";
-import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { GestureHandlerRootView } from "react-native-gesture-handler"; // Import this for gesture handling
-
-import { MainPage } from "./views/MainPage";
-import { AddDataPage } from "./views/AddDataPage";
-import { DetailPage } from "./views/DetailPage";
-import { initDB } from "./models/DataModel";
+import * as SecureStore from "expo-secure-store";
+import HomeScreen from "./views/HomeScreen";
+import DetailScreen from "./views/DetailScreen";
+import OnboardingScreen from "./views/OnboardingScreen";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createStackNavigator();
 
-export default function App() {
-  React.useEffect(() => {
-    initDB();
+const App = () => {
+  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+  useEffect(() => {
+    const checkFirstLaunch = async () => {
+      const firstLaunch = await SecureStore.getItemAsync("isFirstLaunch");
+      if (firstLaunch === null) {
+        setIsFirstLaunch(true);
+        await SecureStore.setItemAsync("isFirstLaunch", "false");
+      } else {
+        setIsFirstLaunch(false);
+      }
+    };
+    checkFirstLaunch();
   }, []);
 
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider>
-        <SafeAreaView style={styles.container}>
-          <StatusBar barStyle="light-content" backgroundColor="white" />
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName="MainPage">
-              <Stack.Screen
-                name="Registration of Election Participants"
-                component={MainPage}
-              />
-              <Stack.Screen name="Add Data" component={AddDataPage} />
-              <Stack.Screen name="Detail" component={DetailPage} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </SafeAreaView>
-      </ThemeProvider>
-    </GestureHandlerRootView>
-  );
-}
+  if (isFirstLaunch === null) {
+    return null;
+  }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        {isFirstLaunch ? (
+          <Stack.Screen
+            name="Onboarding"
+            component={OnboardingScreen}
+            options={{ headerShown: false }}
+          />
+        ) : (
+          <>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Detail" component={DetailScreen} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;

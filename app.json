@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Survey Pemilu",
+    "name": "Sayurin",
     "slug": "MVCapp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -28,6 +28,9 @@
       "eas": {
         "projectId": "6be47b8f-875a-4347-913b-6bda33390386"
       }
-    }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }
