@@ -10,8 +10,6 @@ export const initDB = async () => {
       number TEXT NOT NULL,
       name TEXT NOT NULL,
       address TEXT NOT NULL,
-      lat TEXT NOT NULL,
-      long TEXT NOT NULL,
       age INTEGER NOT NULL,
       gender TEXT NOT NULL
     );
