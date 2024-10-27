@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "507440970921",
+    "firebase_url": "https://weesata-d6db3.firebaseio.com",
+    "project_id": "weesata-d6db3",
+    "storage_bucket": "weesata-d6db3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507440970921:android:e97a1f2c799c77b9977db8",
+        "android_client_info": {
+          "package_name": "com.nicholasa.s1.MVCapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507440970921-gfcnjs6iajogh60nt2qadn7l1fm8gqf8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj0Z6T4h-WDZIs_LaubZHsCCAW9vIGjsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507440970921-gfcnjs6iajogh60nt2qadn7l1fm8gqf8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

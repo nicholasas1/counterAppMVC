@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, TextInput, Button } from "react-native";
 import {
   getDataById,
@@ -10,9 +10,11 @@ import { styles } from "../styles/FormStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 export const DetailPage = () => {
   const route = useRoute();
+  const ref = useRef(null);
   const { id } = route.params;
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -22,14 +24,20 @@ export const DetailPage = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
+    // Set initial address text when the component mounts
+    ref.current?.setAddressText("Some Text"); // Replace 'Some Text' with your initial address
+  }, []);
+
+  useEffect(() => {
     getDataById(id, (data) => {
+      ref.current.setAddressText(data.address);
       setName(data.name);
       setAge(data.age.toString());
       setGender(data.gender);
       setId_card_number(data.number);
       setAddress(data.address);
     });
-  }, []);
+  }, [id]);
 
   const handleEdit = () => {
     editData(id, name, parseInt(age), gender, address, id_card_number, () => {
@@ -62,14 +70,6 @@ export const DetailPage = () => {
         onChangeText={setName}
       />
 
-      <Text style={styles.label}>Address</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your address"
-        value={address}
-        onChangeText={setAddress}
-      />
-
       <Text style={styles.label}>Age</Text>
       <TextInput
         style={styles.input}
@@ -90,6 +90,20 @@ export const DetailPage = () => {
         <Picker.Item label="Female" value="Female" />
         <Picker.Item label="Other" value="Other" />
       </Picker>
+
+      <Text style={styles.label}>Address</Text>
+      <GooglePlacesAutocomplete
+        style={styles.input}
+        placeholder="Search"
+        ref={ref}
+        onPress={(data, details = null) => {
+          setAddress(data.description);
+        }}
+        query={{
+          key: "AIzaSyCYSACWyuHjNDhCNh1HpUSOMR5PzXG53_I",
+          language: "en",
+        }}
+      />
 
       <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.editButton} onPress={handleEdit}>

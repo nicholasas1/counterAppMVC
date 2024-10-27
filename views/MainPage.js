@@ -1,13 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { View, FlatList, Text, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, FlatList, Text, Button, Image, StyleSheet } from "react-native";
 import { getAllData } from "../controller/DataController";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { styles } from "../styles/MainPageStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const MainPage = () => {
   const [data, setData] = useState([]);
+  const [name, setName] = useState("");
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userDataString = await AsyncStorage.getItem("userData");
+        if (userDataString) {
+          const userData = JSON.parse(userDataString);
+          setName(userData);
+        }
+      } catch (error) {
+        console.error("Failed to load user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -24,6 +41,20 @@ export const MainPage = () => {
 
   return (
     <View style={styles.container}>
+      {/* Header dengan Gambar Profil dan Teks */}
+      <View style={styles.header}>
+        <View style={styles.nameContainer}>
+          <Text style={styles.greetingText}>Hai, {name.name}</Text>
+        </View>
+        <View style={styles.profileContainer}>
+          <Image
+            source={{ uri: name.photo }} // Ganti dengan URL gambar profil yang sesuai
+            style={styles.profileImage}
+          />
+        </View>
+      </View>
+
+      {/* Daftar Item */}
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
@@ -38,6 +69,7 @@ export const MainPage = () => {
           </TouchableOpacity>
         )}
       />
+
       <Button
         title="Add Data"
         onPress={() => navigation.navigate("Add Data")}
@@ -45,3 +77,46 @@ export const MainPage = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  nameContainer: {
+    flex: 1,
+  },
+  profileContainer: {},
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20, // Membuat gambar menjadi bulat
+  },
+  greetingText: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  item: {
+    padding: 10,
+    marginVertical: 8,
+    backgroundColor: "#f9c2ff",
+    borderRadius: 5,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  age: {
+    fontSize: 14,
+  },
+  gender: {
+    fontSize: 14,
+    color: "gray",
+  },
+});

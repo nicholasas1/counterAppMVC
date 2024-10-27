@@ -5,10 +5,10 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler"; // Import this for gesture handling
-
 import { MainPage } from "./views/MainPage";
 import { AddDataPage } from "./views/AddDataPage";
 import { DetailPage } from "./views/DetailPage";
+import { LoginPage } from "./views/LoginPage";
 import { initDB } from "./models/DataModel";
 
 const Stack = createStackNavigator();
@@ -25,6 +25,7 @@ export default function App() {
           <StatusBar barStyle="light-content" backgroundColor="white" />
           <NavigationContainer>
             <Stack.Navigator initialRouteName="MainPage">
+              <Stack.Screen name="Login" component={LoginPage} />
               <Stack.Screen
                 name="Registration of Election Participants"
                 component={MainPage}

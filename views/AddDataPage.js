@@ -8,6 +8,8 @@ import { Select } from "@mui/material";
 import { Picker } from "@react-native-picker/picker";
 import { Text } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import "react-native-get-random-values";
 
 export const AddDataPage = () => {
   const [name, setName] = useState("");
@@ -50,14 +52,6 @@ export const AddDataPage = () => {
         onChangeText={setName}
       />
 
-      <Text style={styles.label}>Address</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your address"
-        value={address}
-        onChangeText={setAddress}
-      />
-
       <Text style={styles.label}>Age</Text>
       <TextInput
         style={styles.input}
@@ -78,6 +72,19 @@ export const AddDataPage = () => {
         <Picker.Item label="Female" value="Female" />
         <Picker.Item label="Other" value="Other" />
       </Picker>
+
+      <Text style={styles.label}>Address</Text>
+      <GooglePlacesAutocomplete
+        style={styles.input}
+        placeholder="Search"
+        onPress={(data, details = null) => {
+          setAddress(data.description);
+        }}
+        query={{
+          key: "AIzaSyCYSACWyuHjNDhCNh1HpUSOMR5PzXG53_I",
+          language: "en",
+        }}
+      />
 
       <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
