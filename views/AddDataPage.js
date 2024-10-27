@@ -34,7 +34,7 @@ export const AddDataPage = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.label}>Id Number</Text>
       <TextInput
         style={styles.input}
@@ -89,6 +89,6 @@ export const AddDataPage = () => {
       <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };

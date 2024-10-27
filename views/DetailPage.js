@@ -52,7 +52,7 @@ export const DetailPage = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.label}>Id Number</Text>
       <TextInput
         style={styles.input}
@@ -114,6 +114,6 @@ export const DetailPage = () => {
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };

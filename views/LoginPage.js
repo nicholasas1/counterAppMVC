@@ -12,16 +12,25 @@ import { ThemeProvider } from "react-native-elements";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
 import auth from "@react-native-firebase/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Pastikan Anda menginstal library ini
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 export const LoginPage = () => {
-  const navigation = useNavigation(); // Initialize navigation
+  const navigation = useNavigation();
 
   useEffect(() => {
-    if (AsyncStorage.getItem("userData")) {
-      navigation.navigate("Registration of Election Participants");
-    }
+    const fetchUserData = async () => {
+      try {
+        const userDataString = await AsyncStorage.getItem("userData");
+        if (userDataString) {
+          navigation.navigate("Registration of Election Participants");
+        }
+      } catch (error) {
+        console.error("Failed to load user data:", error);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   async function onGoogleButtonPress() {

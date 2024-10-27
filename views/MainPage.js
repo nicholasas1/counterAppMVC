@@ -40,17 +40,13 @@ export const MainPage = () => {
   );
 
   return (
-    <View style={styles.container}>
-      {/* Header dengan Gambar Profil dan Teks */}
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.nameContainer}>
           <Text style={styles.greetingText}>Hai, {name.name}</Text>
         </View>
         <View style={styles.profileContainer}>
-          <Image
-            source={{ uri: name.photo }} // Ganti dengan URL gambar profil yang sesuai
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: name.photo }} style={styles.profileImage} />
         </View>
       </View>
 
@@ -74,7 +70,7 @@ export const MainPage = () => {
         title="Add Data"
         onPress={() => navigation.navigate("Add Data")}
       />
-    </View>
+    </ScrollView>
   );
 };
 
