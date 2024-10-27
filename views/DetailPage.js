@@ -7,7 +7,7 @@ import {
 } from "../controller/DataController";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { styles } from "../styles/FormStyles";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Text } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
@@ -24,8 +24,7 @@ export const DetailPage = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Set initial address text when the component mounts
-    ref.current?.setAddressText("Some Text"); // Replace 'Some Text' with your initial address
+    ref.current?.setAddressText("Some Text");
   }, []);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export const DetailPage = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
       <Text style={styles.label}>Id Number</Text>
       <TextInput
         style={styles.input}
@@ -100,7 +99,7 @@ export const DetailPage = () => {
           setAddress(data.description);
         }}
         query={{
-          key: "AIzaSyCYSACWyuHjNDhCNh1HpUSOMR5PzXG53_I",
+          key: "",
           language: "en",
         }}
       />

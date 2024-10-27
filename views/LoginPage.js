@@ -22,7 +22,8 @@ export const LoginPage = () => {
     const fetchUserData = async () => {
       try {
         const userDataString = await AsyncStorage.getItem("userData");
-        if (userDataString) {
+        const userData = JSON.parse(userDataString);
+        if (userData) {
           navigation.navigate("Registration of Election Participants");
         }
       } catch (error) {
@@ -68,7 +69,7 @@ export const LoginPage = () => {
       console.log("User data saved:", userData);
 
       navigation.navigate("Registration of Election Participants");
-      return userData; // Kembalikan data pengguna jika diperlukan
+      return userData;
     } catch (error) {
       console.error("Login failed:", error);
     }

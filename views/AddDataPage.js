@@ -7,7 +7,7 @@ import { styles } from "../styles/FormStyles";
 import { Select } from "@mui/material";
 import { Picker } from "@react-native-picker/picker";
 import { Text } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import "react-native-get-random-values";
 
@@ -34,7 +34,7 @@ export const AddDataPage = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} keyboardShouldPersistTaps='handled'>
       <Text style={styles.label}>Id Number</Text>
       <TextInput
         style={styles.input}
@@ -81,7 +81,7 @@ export const AddDataPage = () => {
           setAddress(data.description);
         }}
         query={{
-          key: "AIzaSyCYSACWyuHjNDhCNh1HpUSOMR5PzXG53_I",
+          key: "",
           language: "en",
         }}
       />

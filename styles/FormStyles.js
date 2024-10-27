@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f9f9f9", // Light background for a cleaner look
+    backgroundColor: "#f9f9f9", 
   },
   input: {
     borderColor: "#ddd",
@@ -12,18 +12,18 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
     padding: 12,
     borderRadius: 8,
-    backgroundColor: "#fff", // White background for inputs
+    backgroundColor: "#fff", 
     fontSize: 16,
-    shadowColor: "#000", // Subtle shadow for inputs
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 2, // Elevation for Android shadow
+    elevation: 2,
   },
   label: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333", // Darker color for label text
+    color: "#333",
     marginBottom: 8,
   },
   picker: {
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonContainer: {
-    backgroundColor: "#007bff", // Button color
+    backgroundColor: "#007bff", 
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 8,
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonText: {
-    color: "#fff", // White text on the button
+    color: "#fff", 
     fontSize: 18,
     fontWeight: "bold",
   },
@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   editButton: {
-    backgroundColor: "#4CAF50", // Green color for edit
+    backgroundColor: "#4CAF50", 
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 8,
@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
     elevation: 2,
   },
   deleteButton: {
-    backgroundColor: "#F44336", // Red color for delete
+    backgroundColor: "#F44336", 
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 8,
