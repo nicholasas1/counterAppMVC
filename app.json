@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Survey Pemilu",
+    "name": "Tugas Ujian",
     "slug": "MVCapp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,6 +16,11 @@
       "supportsTablet": true
     },
     "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCp-BUoX8B8699rkbnb2P2CK4gXSeesVcc"
+        }
+      },
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
